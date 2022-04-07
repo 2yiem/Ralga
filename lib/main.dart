@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lglaw/language.dart';
+import 'package:lglaw/pages/home-rw.dart';
 
 void main() {
   runApp(const MyApp());
@@ -40,7 +41,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void navigationPage() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const Language()),
+      MaterialPageRoute(builder: (context) => const HomeRW()),
     );
   }
 

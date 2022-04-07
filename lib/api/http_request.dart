@@ -2,12 +2,12 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 class HttpRequest {
-  final String _url = 'https://new.yesconnect.rw/';
-  final String _imageUrl = 'https://new.yesconnect.rw/assets/images/';
+  // final String _url = 'https://new.yesconnect.rw/';
+  // final String _imageUrl = 'https://new.yesconnect.rw/assets/images/';
    //final String _url = 'http://192.168.8.105/YesConnectAPI/public/';
   // final String _imageUrl = 'http://192.168.8.105/YesConnectAPI/public/assets/images/';
-  //  final String _url = 'http://localhost:8080/';
-  //  final String _imageUrl = 'http://localhost:8080/assets/images/';
+   final String _url = 'http://localhost:8084/';
+   final String _imageUrl = 'http://localhost:8084/assets/images/';
 
   getImage(){
     return _imageUrl;
