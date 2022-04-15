@@ -1,41 +1,41 @@
 import 'dart:convert';
 
-import 'package:accordion/accordion.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lglaw/api/http_request.dart';
+import 'package:lglaw/models/article_model.dart';
 import 'package:lglaw/models/chapter_model.dart';
-import 'package:lglaw/pages/laws/laws-rw.dart';
 import 'package:lglaw/utils/colors.dart';
 import 'package:lglaw/widgets/app-icon.dart';
-import 'package:lglaw/widgets/big-text.dart';
-import 'package:lglaw/widgets/expandable-text.dart';
 
-class HomeRW extends StatefulWidget {
+class LawsRW extends StatefulWidget {
   final String id, title;
-  const HomeRW(this.id, this.title);
+  const LawsRW(this.id, this.title);
 
   @override
-  State<HomeRW> createState() => _HomeRWState();
+  State<LawsRW> createState() => _LawsRWState();
 }
 
-class _HomeRWState extends State<HomeRW> {
-  var chapters = <Chapters>[];
+class _LawsRWState extends State<LawsRW> {
+  var laws = <Article>[];
 
   @override
   void initState() {
     super.initState();
     _initData();
+
+    print("id: " + widget.id.toString());
   }
 
   _initData() async {
     await HttpRequest()
-        .getPublicData("retrieveChaptersRW/" + widget.id)
+        .getPublicData("articleRetrieveRW/" + widget.id)
         .then((response) {
       setState(() {
         Iterable list = json.decode(response.body);
-        chapters = list.map((model) => Chapters.fromJson(model)).toList();
+        laws = list.map((model) => Article.fromJson(model)).toList();
 
         print(list);
       });
@@ -43,6 +43,7 @@ class _HomeRWState extends State<HomeRW> {
   }
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   _appBar(height) => PreferredSize(
         preferredSize: Size(MediaQuery.of(context).size.width, height + 80),
         child: Stack(
@@ -79,7 +80,6 @@ class _HomeRWState extends State<HomeRW> {
                                 overflow: TextOverflow.visible,
                                 style: GoogleFonts.lato(
                                     color: whiteColor,
-                                    fontSize: 17,
                                     fontWeight: FontWeight.w600)),
                           ),
                         ],
@@ -111,32 +111,35 @@ class _HomeRWState extends State<HomeRW> {
           physics: AlwaysScrollableScrollPhysics(),
           child: Column(
             children: [
-              Container(
-                height: MediaQuery.of(context).size.height,
-                margin: EdgeInsets.only(bottom: 10, left: 8, right: 8, top: 10),
-                child: ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    itemCount: chapters.length,
-                    itemBuilder: (context, position) {
-                      return GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => LawsRW(
-                                chapters[position].id,
-                                chapters[position].text,
-                              )),
-                            );
-                        }, child: _buildShopItem(position)
-                        );
-                    }),
-              ),
+              laws.isEmpty
+                  ? Container(
+                      height: MediaQuery.of(context).size.height,
+                      margin: EdgeInsets.only(
+                          bottom: 10, left: 8, right: 8, top: 10),
+                      child: Center(
+                        child: SpinKitDoubleBounce(
+                          color: appColor,
+                          size: 70,
+                        ),
+                      ),
+                    )
+                  : Container(
+                      height: MediaQuery.of(context).size.height,
+                      margin: EdgeInsets.only(
+                          bottom: 10, left: 8, right: 8, top: 10),
+                      child: ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          itemCount: laws.length,
+                          itemBuilder: (context, position) {
+                            return _buildLawsItem(position);
+                          }),
+                    ),
             ],
           ),
         ));
   }
 
-  Widget _buildShopItem(int index) {
+  Widget _buildLawsItem(int index) {
     return Stack(
       children: [
         Align(
@@ -154,9 +157,10 @@ class _HomeRWState extends State<HomeRW> {
                       blurRadius: 5)
                 ]),
             child: Container(
-              padding: EdgeInsets.only(left: 5, right: 5, top: 5),
+              padding: EdgeInsets.only(left: 0, right: 5, top: 5),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -176,22 +180,26 @@ class _HomeRWState extends State<HomeRW> {
                       Padding(
                         padding: const EdgeInsets.all(4.0),
                         child: Container(
-                          margin: EdgeInsets.only(left: 5),
+                          margin: EdgeInsets.only(left: 1),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-                                width: 270,
-                                child: Text(chapters[index].text , style: TextStyle(color: appDarkColor),),
+                                width: 280,
+                                child: ExpandablePanel(
+                                  header: Padding(
+                                    padding: const EdgeInsets.only(top: 5),
+                                    child: Text(laws[index].title, style: TextStyle(fontSize: 17, color: appDarkColor),),
+                                  ),
+                                  collapsed: Text(' ', softWrap: true, textAlign: TextAlign.justify, overflow: TextOverflow.ellipsis,),
+                                  expanded: Padding(
+                                    padding: const EdgeInsets.only(top: 5),
+                                    child: Text(laws[index].law, softWrap: true, textAlign: TextAlign.justify),
+                                  ),
+                                  
+                                ),
                               ),
-                              SizedBox(
-                                height: 4,
-                              ),
-                              Text(
-                                  "Ingingo : " + chapters[index].articles_count,
-                                  style: GoogleFonts.lato(
-                                      fontSize: 15, color: Colors.black45)),
                               SizedBox(
                                 height: 4,
                               ),
@@ -209,7 +217,6 @@ class _HomeRWState extends State<HomeRW> {
             ),
           ),
         ),
-        
       ],
     );
   }

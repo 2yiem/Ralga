@@ -6,32 +6,35 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lglaw/api/http_request.dart';
 import 'package:lglaw/models/chapter_model.dart';
-import 'package:lglaw/pages/laws/laws-rw.dart';
+import 'package:lglaw/pages/laws/laws-en.dart';
 import 'package:lglaw/utils/colors.dart';
 import 'package:lglaw/widgets/app-icon.dart';
 import 'package:lglaw/widgets/big-text.dart';
 import 'package:lglaw/widgets/expandable-text.dart';
 
-class HomeRW extends StatefulWidget {
+class HomeEN extends StatefulWidget {
+
   final String id, title;
-  const HomeRW(this.id, this.title);
+  const HomeEN(this.id, this.title);
 
   @override
-  State<HomeRW> createState() => _HomeRWState();
+  State<HomeEN> createState() => _HomeENState();
 }
 
-class _HomeRWState extends State<HomeRW> {
+class _HomeENState extends State<HomeEN> {
   var chapters = <Chapters>[];
 
   @override
   void initState() {
     super.initState();
     _initData();
+
+    
   }
 
   _initData() async {
     await HttpRequest()
-        .getPublicData("retrieveChaptersRW/" + widget.id)
+        .getPublicData("retrieveChaptersEN/" + widget.id)
         .then((response) {
       setState(() {
         Iterable list = json.decode(response.body);
@@ -65,6 +68,7 @@ class _HomeRWState extends State<HomeRW> {
                     Container(
                       margin: EdgeInsets.only(top: 10),
                       child: Row(
+
                         children: [
                           GestureDetector(
                             onTap: (() => Navigator.pop(context)),
@@ -76,7 +80,7 @@ class _HomeRWState extends State<HomeRW> {
                           Container(
                             width: 220,
                             child: Text(widget.title,
-                                overflow: TextOverflow.visible,
+                            overflow: TextOverflow.visible,
                                 style: GoogleFonts.lato(
                                     color: whiteColor,
                                     fontSize: 17,
@@ -99,7 +103,7 @@ class _HomeRWState extends State<HomeRW> {
             Container(), // Required some widget in between to float AppBar
           ],
         ),
-      );
+    );
 
   @override
   Widget build(BuildContext context) {
@@ -122,7 +126,7 @@ class _HomeRWState extends State<HomeRW> {
                         onTap: () {
                           Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => LawsRW(
+                              MaterialPageRoute(builder: (context) => LawsEN(
                                 chapters[position].id,
                                 chapters[position].text,
                               )),
@@ -154,7 +158,7 @@ class _HomeRWState extends State<HomeRW> {
                       blurRadius: 5)
                 ]),
             child: Container(
-              padding: EdgeInsets.only(left: 5, right: 5, top: 5),
+              padding: EdgeInsets.only(left: 0, right: 5, top: 5),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -176,20 +180,23 @@ class _HomeRWState extends State<HomeRW> {
                       Padding(
                         padding: const EdgeInsets.all(4.0),
                         child: Container(
-                          margin: EdgeInsets.only(left: 5),
+                          margin: EdgeInsets.only(left: 3),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Container(
+                             Container(
                                 width: 270,
-                                child: Text(chapters[index].text , style: TextStyle(color: appDarkColor),),
+                                
+                                child: Text(chapters[index].text, style: TextStyle(color: appDarkColor),),
                               ),
+                            
                               SizedBox(
                                 height: 4,
                               ),
                               Text(
-                                  "Ingingo : " + chapters[index].articles_count,
+                                  "Articles : " +
+                                      chapters[index].articles_count,
                                   style: GoogleFonts.lato(
                                       fontSize: 15, color: Colors.black45)),
                               SizedBox(

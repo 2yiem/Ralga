@@ -3,25 +3,27 @@ import 'dart:convert';
 import 'package:accordion/accordion.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lglaw/api/http_request.dart';
+import 'package:lglaw/models/category_model.dart';
 import 'package:lglaw/models/chapter_model.dart';
-import 'package:lglaw/pages/laws/laws-rw.dart';
+import 'package:lglaw/pages/home-en.dart';
+import 'package:lglaw/pages/home-rw.dart';
 import 'package:lglaw/utils/colors.dart';
 import 'package:lglaw/widgets/app-icon.dart';
 import 'package:lglaw/widgets/big-text.dart';
 import 'package:lglaw/widgets/expandable-text.dart';
 
-class HomeRW extends StatefulWidget {
-  final String id, title;
-  const HomeRW(this.id, this.title);
+class CategoryEN extends StatefulWidget {
+  const CategoryEN({Key? key}) : super(key: key);
 
   @override
-  State<HomeRW> createState() => _HomeRWState();
+  State<CategoryEN> createState() => _CategoryENState();
 }
 
-class _HomeRWState extends State<HomeRW> {
-  var chapters = <Chapters>[];
+class _CategoryENState extends State<CategoryEN> {
+  var categories = <Category>[];
 
   @override
   void initState() {
@@ -30,12 +32,10 @@ class _HomeRWState extends State<HomeRW> {
   }
 
   _initData() async {
-    await HttpRequest()
-        .getPublicData("retrieveChaptersRW/" + widget.id)
-        .then((response) {
+    await HttpRequest().getPublicData("retrieveCategoriesEN").then((response) {
       setState(() {
         Iterable list = json.decode(response.body);
-        chapters = list.map((model) => Chapters.fromJson(model)).toList();
+        categories = list.map((model) => Category.fromJson(model)).toList();
 
         print(list);
       });
@@ -57,7 +57,7 @@ class _HomeRWState extends State<HomeRW> {
                 ]),
               ), // Background
               child: Padding(
-                padding: EdgeInsets.only(left: 15, right: 10, top: 25),
+                padding: EdgeInsets.only(left: 20, right: 20, top: 25),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,12 +74,12 @@ class _HomeRWState extends State<HomeRW> {
                             ),
                           ),
                           Container(
-                            width: 220,
-                            child: Text(widget.title,
+                            width: 200,
+                            child: Text("Rwanda Local Government Law",
                                 overflow: TextOverflow.visible,
                                 style: GoogleFonts.lato(
                                     color: whiteColor,
-                                    fontSize: 17,
+                                    fontSize: 20,
                                     fontWeight: FontWeight.w600)),
                           ),
                         ],
@@ -111,24 +111,33 @@ class _HomeRWState extends State<HomeRW> {
           physics: AlwaysScrollableScrollPhysics(),
           child: Column(
             children: [
+              categories.isEmpty ?
               Container(
-                height: MediaQuery.of(context).size.height,
+                height: 700,
+                margin: EdgeInsets.only(bottom: 10, left: 8, right: 8, top: 10),
+                child: Center(
+                  child: SpinKitDoubleBounce(color: appColor,size: 70,),
+                ), 
+              ):
+              Container(
+                height: 1000,
                 margin: EdgeInsets.only(bottom: 10, left: 8, right: 8, top: 10),
                 child: ListView.builder(
                     scrollDirection: Axis.vertical,
-                    itemCount: chapters.length,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: categories.length,
                     itemBuilder: (context, position) {
                       return GestureDetector(
-                        onTap: () {
-                          Navigator.push(
+                          onTap: (() {
+                            Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => LawsRW(
-                                chapters[position].id,
-                                chapters[position].text,
+                              MaterialPageRoute(builder: (context) => HomeEN(
+                                categories[position].id,
+                                categories[position].title,
                               )),
                             );
-                        }, child: _buildShopItem(position)
-                        );
+                          }),
+                          child: _buildCategoryItem(position));
                     }),
               ),
             ],
@@ -136,7 +145,7 @@ class _HomeRWState extends State<HomeRW> {
         ));
   }
 
-  Widget _buildShopItem(int index) {
+  Widget _buildCategoryItem(int index) {
     return Stack(
       children: [
         Align(
@@ -154,42 +163,42 @@ class _HomeRWState extends State<HomeRW> {
                       blurRadius: 5)
                 ]),
             child: Container(
-              padding: EdgeInsets.only(left: 5, right: 5, top: 5),
+              padding: EdgeInsets.only(left: 0, right: 5, top: 5),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        height: 40,
-                        width: 40,
-                        margin: EdgeInsets.all(3),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border:
-                              Border.all(color: overlayWhiteColor, width: 6),
-                        ),
-                        child: Image.asset("assets/images/rwlogo.png"),
-                      ),
+              height: 40,
+              width: 40,
+              margin: EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(color: overlayWhiteColor, width: 3),
+              ),
+              child: Image.asset("assets/images/rwlogo.png"),
+            ),
                       Padding(
                         padding: const EdgeInsets.all(4.0),
                         child: Container(
-                          margin: EdgeInsets.only(left: 5),
+                          margin: EdgeInsets.only(left: 0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-                                width: 270,
-                                child: Text(chapters[index].text , style: TextStyle(color: appDarkColor),),
+                                width: 280,
+                                child: Text(categories[index].title, style: TextStyle(color: appDarkColor),),
                               ),
                               SizedBox(
                                 height: 4,
                               ),
                               Text(
-                                  "Ingingo : " + chapters[index].articles_count,
+                                  "Articles : " +
+                                      categories[index].chapters_count,
                                   style: GoogleFonts.lato(
                                       fontSize: 15, color: Colors.black45)),
                               SizedBox(

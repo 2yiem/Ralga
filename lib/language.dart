@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lglaw/pages/categories/category-en.dart';
+import 'package:lglaw/pages/categories/category-fr.dart';
+import 'package:lglaw/pages/categories/category-rw.dart';
+import 'package:lglaw/pages/home-en.dart';
+import 'package:lglaw/pages/home-fr.dart';
 import 'package:lglaw/pages/home-rw.dart';
 import 'package:lglaw/utils/colors.dart';
 
@@ -48,9 +53,9 @@ class _LanguageState extends State<Language> {
                       GestureDetector(
                         onTap: (() {
                           Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const HomeRW()),
-    );
+                            context,
+                            MaterialPageRoute(builder: (context) => const CategoryEN()),
+                          );
                         }),
                         child: Column(
                           children: [
@@ -75,7 +80,10 @@ class _LanguageState extends State<Language> {
                       ),
                       GestureDetector(
                         onTap: (() {
-                          print("cclicked");
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const CategoryRW()),
+                          );
                         }),
                         child: Column(
                           children: [
@@ -100,7 +108,10 @@ class _LanguageState extends State<Language> {
                       ),
                       GestureDetector(
                         onTap: (() {
-                          print("cclicked");
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const CategoryFR()),
+                          );
                         }),
                         child: Column(
                           children: [

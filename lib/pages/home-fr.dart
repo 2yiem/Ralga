@@ -6,21 +6,21 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lglaw/api/http_request.dart';
 import 'package:lglaw/models/chapter_model.dart';
-import 'package:lglaw/pages/laws/laws-rw.dart';
+import 'package:lglaw/pages/laws/laws-fr.dart';
 import 'package:lglaw/utils/colors.dart';
 import 'package:lglaw/widgets/app-icon.dart';
 import 'package:lglaw/widgets/big-text.dart';
 import 'package:lglaw/widgets/expandable-text.dart';
 
-class HomeRW extends StatefulWidget {
+class HomeFR extends StatefulWidget {
   final String id, title;
-  const HomeRW(this.id, this.title);
+  const HomeFR(this.id, this.title);
 
   @override
-  State<HomeRW> createState() => _HomeRWState();
+  State<HomeFR> createState() => _HomeFRState();
 }
 
-class _HomeRWState extends State<HomeRW> {
+class _HomeFRState extends State<HomeFR> {
   var chapters = <Chapters>[];
 
   @override
@@ -31,7 +31,7 @@ class _HomeRWState extends State<HomeRW> {
 
   _initData() async {
     await HttpRequest()
-        .getPublicData("retrieveChaptersRW/" + widget.id)
+        .getPublicData("retrieveChaptersFR/" + widget.id)
         .then((response) {
       setState(() {
         Iterable list = json.decode(response.body);
@@ -65,6 +65,7 @@ class _HomeRWState extends State<HomeRW> {
                     Container(
                       margin: EdgeInsets.only(top: 10),
                       child: Row(
+
                         children: [
                           GestureDetector(
                             onTap: (() => Navigator.pop(context)),
@@ -76,7 +77,7 @@ class _HomeRWState extends State<HomeRW> {
                           Container(
                             width: 220,
                             child: Text(widget.title,
-                                overflow: TextOverflow.visible,
+                            overflow: TextOverflow.visible,
                                 style: GoogleFonts.lato(
                                     color: whiteColor,
                                     fontSize: 17,
@@ -116,13 +117,14 @@ class _HomeRWState extends State<HomeRW> {
                 margin: EdgeInsets.only(bottom: 10, left: 8, right: 8, top: 10),
                 child: ListView.builder(
                     scrollDirection: Axis.vertical,
+                    physics: NeverScrollableScrollPhysics(),
                     itemCount: chapters.length,
                     itemBuilder: (context, position) {
                       return GestureDetector(
                         onTap: () {
                           Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => LawsRW(
+                              MaterialPageRoute(builder: (context) => LawsFR(
                                 chapters[position].id,
                                 chapters[position].text,
                               )),
@@ -159,7 +161,7 @@ class _HomeRWState extends State<HomeRW> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                   mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
@@ -183,13 +185,16 @@ class _HomeRWState extends State<HomeRW> {
                             children: [
                               Container(
                                 width: 270,
-                                child: Text(chapters[index].text , style: TextStyle(color: appDarkColor),),
+                                
+                                child: Text(chapters[index].text, style: TextStyle(color: appDarkColor),),
                               ),
+                            
                               SizedBox(
                                 height: 4,
                               ),
                               Text(
-                                  "Ingingo : " + chapters[index].articles_count,
+                                  "Articles : " +
+                                      chapters[index].articles_count,
                                   style: GoogleFonts.lato(
                                       fontSize: 15, color: Colors.black45)),
                               SizedBox(
