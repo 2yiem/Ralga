@@ -28,7 +28,7 @@ class _LanguageState extends State<Language> {
             Text('Welcome!',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.lato(
-                    color: Colors.blue,
+                    color: appColor,
                     fontSize: 25,
                     fontWeight: FontWeight.bold)),
             Container(
@@ -42,10 +42,10 @@ class _LanguageState extends State<Language> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text("RALGA is a membership organization that brings together local government entities in Rwanda.",
-                    textAlign: TextAlign.justify, style: GoogleFonts.laila(fontSize: 14),),
+                    textAlign: TextAlign.justify, style: GoogleFonts.laila(fontSize: 15),),
                   ),
                   SizedBox(height: 60,),
-                  Text("Choose language"),
+                  Text("Choose language", style: TextStyle(color: appColor),),
                   SizedBox(height: 20,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -73,7 +73,7 @@ class _LanguageState extends State<Language> {
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Text("English"),
+                              child: Text("English",style: TextStyle(color: appColor)),
                             ),
                           ],
                         ),
@@ -101,7 +101,7 @@ class _LanguageState extends State<Language> {
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Text("Kinyarwanda"),
+                              child: Text("Kinyarwanda",style: TextStyle(color: appColor)),
                             ),
                           ],
                         ),
@@ -129,7 +129,7 @@ class _LanguageState extends State<Language> {
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Text("French"),
+                              child: Text("French",style: TextStyle(color: appColor)),
                             ),
                           ],
                         ),

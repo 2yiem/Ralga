@@ -7,6 +7,7 @@ import 'package:lglaw/language.dart';
 import 'package:lglaw/pages/categories/category-rw.dart';
 import 'package:lglaw/pages/decentralization/decentralization-en.dart';
 import 'package:lglaw/pages/home-rw.dart';
+import 'package:lglaw/utils/colors.dart';
 
 void main() {
   runApp(const MyApp());
@@ -43,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void navigationPage() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const DecentralizationEN()),
+      MaterialPageRoute(builder: (context) => const Language()),
     );
   }
 
@@ -69,12 +70,12 @@ class _SplashScreenState extends State<SplashScreen> {
                 alignment: Alignment.center,
                 child: Text("Rwanda Local Government Law",
                   textAlign: TextAlign.center,
-                        style: GoogleFonts.lato(color: Colors.blue, fontSize: 25, fontWeight: FontWeight.bold)),
+                        style: GoogleFonts.lato(color: appColor, fontSize: 25, fontWeight: FontWeight.bold)),
               ),
             )),
           SizedBox(height: 30,),
           SpinKitDoubleBounce(
-            color: Colors.blue,
+            color: appDarkColor,
           )
         ],
       ),

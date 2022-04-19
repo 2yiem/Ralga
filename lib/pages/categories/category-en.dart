@@ -52,8 +52,8 @@ class _CategoryENState extends State<CategoryEN> {
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                 gradient: LinearGradient(colors: [
-                  appColor,
-                  appColor,
+                  appDarkColor,
+                  appDarkColor,
                 ]),
               ), // Background
               child: Padding(
@@ -74,12 +74,12 @@ class _CategoryENState extends State<CategoryEN> {
                             ),
                           ),
                           Container(
-                            width: 200,
-                            child: Text("Rwanda Local Government Law",
+                            width: 190,
+                            child: Text("Summary",
                                 overflow: TextOverflow.visible,
                                 style: GoogleFonts.lato(
                                     color: whiteColor,
-                                    fontSize: 20,
+                                    fontSize: 30,
                                     fontWeight: FontWeight.w600)),
                           ),
                         ],
@@ -110,17 +110,19 @@ class _CategoryENState extends State<CategoryEN> {
         body: SingleChildScrollView(
           physics: AlwaysScrollableScrollPhysics(),
           child: Column(
+            
             children: [
+              
               categories.isEmpty ?
               Container(
-                height: 700,
+                height: MediaQuery.of(context).size.height,
                 margin: EdgeInsets.only(bottom: 10, left: 8, right: 8, top: 10),
                 child: Center(
                   child: SpinKitDoubleBounce(color: appColor,size: 70,),
                 ), 
               ):
               Container(
-                height: 1000,
+                height: MediaQuery.of(context).size.height,
                 margin: EdgeInsets.only(bottom: 10, left: 8, right: 8, top: 10),
                 child: ListView.builder(
                     scrollDirection: Axis.vertical,
@@ -163,24 +165,25 @@ class _CategoryENState extends State<CategoryEN> {
                       blurRadius: 5)
                 ]),
             child: Container(
-              padding: EdgeInsets.only(left: 0, right: 5, top: 5),
+              padding: EdgeInsets.only(left: 0, right: 3, top: 5),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
+                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-              height: 40,
-              width: 40,
-              margin: EdgeInsets.all(5),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: overlayWhiteColor, width: 3),
-              ),
-              child: Image.asset("assets/images/rwlogo.png"),
-            ),
+                        height: 35,
+                        width: 35,
+                        margin: EdgeInsets.all(2),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(color: overlayWhiteColor, width: 3),
+                        ),
+                        child: Image.asset("assets/images/rwlogo.png"),
+                      ),
                       Padding(
                         padding: const EdgeInsets.all(4.0),
                         child: Container(
@@ -190,17 +193,30 @@ class _CategoryENState extends State<CategoryEN> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-                                width: 280,
-                                child: Text(categories[index].title, style: TextStyle(color: appDarkColor),),
+                                width: 270,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(categories[index].title , style: TextStyle(color: appDarkColor, fontSize: 20, fontWeight: FontWeight.bold),),
+                                    SizedBox(height: 4,),
+                                    Text(categories[index].law_no, style: TextStyle(color: blackColor, fontSize: 18, fontWeight: FontWeight.bold),),
+                                    Text(categories[index].description, textAlign: TextAlign.justify,style: GoogleFonts.lato(
+                                      fontSize: 15, color: Colors.black45)),
+                                  ],
+                                ),
                               ),
                               SizedBox(
                                 height: 4,
                               ),
-                              Text(
-                                  "Articles : " +
+                              Text(categories[index].id == "1" ?
+                                      "Articles : " +
+                                      categories[index].chapters_count
+                                      :
+                                      "Chapters : " +
                                       categories[index].chapters_count,
                                   style: GoogleFonts.lato(
-                                      fontSize: 15, color: Colors.black45)),
+                                      fontSize: 14, color:appDarkColor)),
                               SizedBox(
                                 height: 4,
                               ),

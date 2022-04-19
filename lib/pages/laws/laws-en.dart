@@ -76,7 +76,7 @@ class _LawsENState extends State<LawsEN> {
                             ),
                           ),
                           Container(
-                            width: 220,
+                            width: 200,
                             child: Text(widget.title,
                                 overflow: TextOverflow.visible,
                                 style: GoogleFonts.lato(
@@ -168,8 +168,8 @@ class _LawsENState extends State<LawsEN> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        height: 40,
-                        width: 40,
+                        height: 35,
+                        width: 35,
                         margin: EdgeInsets.all(3),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
@@ -181,13 +181,13 @@ class _LawsENState extends State<LawsEN> {
                       Padding(
                         padding: const EdgeInsets.all(4.0),
                         child: Container(
-                          margin: EdgeInsets.only(left: 1),
+                          margin: EdgeInsets.only(left: 0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-                                width: 280,
+                                width: 270,
                                 child: ExpandablePanel(
                                   header: Padding(
                                     padding: const EdgeInsets.only(top: 5),

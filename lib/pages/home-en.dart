@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:accordion/accordion.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lglaw/api/http_request.dart';
 import 'package:lglaw/models/chapter_model.dart';
@@ -78,7 +79,7 @@ class _HomeENState extends State<HomeEN> {
                             ),
                           ),
                           Container(
-                            width: 220,
+                            width: 200,
                             child: Text(widget.title,
                             overflow: TextOverflow.visible,
                                 style: GoogleFonts.lato(
@@ -115,6 +116,14 @@ class _HomeENState extends State<HomeEN> {
           physics: AlwaysScrollableScrollPhysics(),
           child: Column(
             children: [
+              chapters.isEmpty ?
+              Container(
+                height: MediaQuery.of(context).size.height,
+                margin: EdgeInsets.only(bottom: 10, left: 8, right: 8, top: 10),
+                child: Center(
+                  child: SpinKitDoubleBounce(color: appColor,size: 70,),
+                ), 
+              ):
               Container(
                 height: MediaQuery.of(context).size.height,
                 margin: EdgeInsets.only(bottom: 10, left: 8, right: 8, top: 10),
@@ -167,8 +176,8 @@ class _HomeENState extends State<HomeEN> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        height: 40,
-                        width: 40,
+                        height: 35,
+                        width: 35,
                         margin: EdgeInsets.all(3),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
@@ -177,6 +186,7 @@ class _HomeENState extends State<HomeEN> {
                         ),
                         child: Image.asset("assets/images/rwlogo.png"),
                       ),
+                      widget.id.toString() == "2" ?
                       Padding(
                         padding: const EdgeInsets.all(4.0),
                         child: Container(
@@ -194,11 +204,43 @@ class _HomeENState extends State<HomeEN> {
                               SizedBox(
                                 height: 4,
                               ),
+                               
                               Text(
                                   "Articles : " +
                                       chapters[index].articles_count,
                                   style: GoogleFonts.lato(
                                       fontSize: 15, color: Colors.black45)),
+                              SizedBox(
+                                height: 4,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ) :
+                       Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Container(
+                          margin: EdgeInsets.only(left: 0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                width: 270,
+                                child: ExpandablePanel(
+                                  header: Padding(
+                                    padding: const EdgeInsets.only(top: 5),
+                                    child: Text(chapters[index].text, style: TextStyle(fontSize: 16, color: appDarkColor),),
+                                  ),
+                                  collapsed: Text(' ', softWrap: true, textAlign: TextAlign.justify, overflow: TextOverflow.ellipsis,),
+                                  expanded: Padding(
+                                    padding: const EdgeInsets.only(top: 5),
+                                    child: Text(chapters[index].description, softWrap: true, textAlign: TextAlign.justify),
+                                  ),
+                                  
+                                ),
+                              ),
+                             
                               SizedBox(
                                 height: 4,
                               ),

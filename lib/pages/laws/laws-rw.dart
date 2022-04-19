@@ -75,7 +75,7 @@ class _LawsRWState extends State<LawsRW> {
                             ),
                           ),
                           Container(
-                            width: 220,
+                            width: 200,
                             child: Text(widget.title,
                                 overflow: TextOverflow.visible,
                                 style: GoogleFonts.lato(
@@ -167,8 +167,8 @@ class _LawsRWState extends State<LawsRW> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        height: 40,
-                        width: 40,
+                        height: 35,
+                        width: 35,
                         margin: EdgeInsets.all(3),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
@@ -186,7 +186,7 @@ class _LawsRWState extends State<LawsRW> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-                                width: 280,
+                                width: 270,
                                 child: ExpandablePanel(
                                   header: Padding(
                                     padding: const EdgeInsets.only(top: 5),

@@ -73,13 +73,13 @@ class _CategoryRWState extends State<CategoryRW> {
                             ),
                           ),
                           Container(
-                            width: 200,
-                            child: Text("Rwanda Local Government Law",
+                            width: 190,
+                            child: Text("Ibirimo",
                                 overflow: TextOverflow.visible,
                                 style: GoogleFonts.lato(
                                     color: whiteColor,
 
-                                    fontSize: 20,
+                                    fontSize: 30,
                                     fontWeight: FontWeight.w600)),
                           ),
                         ],
@@ -111,9 +111,10 @@ class _CategoryRWState extends State<CategoryRW> {
           physics: AlwaysScrollableScrollPhysics(),
           child: Column(
             children: [
+             
               categories.isEmpty
                   ? Container(
-                      height: 700,
+                      height: MediaQuery.of(context).size.height,
                       margin: EdgeInsets.only(
                           bottom: 10, left: 8, right: 8, top: 10),
                       child: Center(
@@ -124,9 +125,8 @@ class _CategoryRWState extends State<CategoryRW> {
                       ),
                     )
                   : Container(
-                      height: 1000,
-                      margin: EdgeInsets.only(
-                          bottom: 10, left: 8, right: 8, top: 10),
+                    height: MediaQuery.of(context).size.height,
+                    margin: EdgeInsets.only(bottom: 10, left: 8, right: 8, top: 10),
                       child: ListView.builder(
                           scrollDirection: Axis.vertical,
                           physics: NeverScrollableScrollPhysics(),
@@ -176,17 +176,19 @@ class _CategoryRWState extends State<CategoryRW> {
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
+                                         crossAxisAlignment: CrossAxisAlignment.start,
+
                     children: [
                       Container(
-              height: 40,
-              width: 40,
-              margin: EdgeInsets.all(5),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: overlayWhiteColor, width: 3),
-              ),
-              child: Image.asset("assets/images/rwlogo.png"),
-            ),
+                        height: 34,
+                        width: 35,
+                        margin: EdgeInsets.all(3),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(color: overlayWhiteColor, width: 3),
+                        ),
+                        child: Image.asset("assets/images/rwlogo.png"),
+                      ),
                       Padding(
                         padding: const EdgeInsets.all(4.0),
                         child: Container(
@@ -196,8 +198,18 @@ class _CategoryRWState extends State<CategoryRW> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-                                width: 280,
-                                child: Text(categories[index].title, style: TextStyle(color: appDarkColor),),
+                                width: 270,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(categories[index].title , style: TextStyle(color: appDarkColor, fontSize: 20, fontWeight: FontWeight.bold),),
+                                    SizedBox(height: 4,),
+                                    Text(categories[index].law_no, style: TextStyle(color: blackColor, fontSize: 18, fontWeight: FontWeight.bold),),
+                                    Text(categories[index].description, textAlign: TextAlign.justify,style: GoogleFonts.lato(
+                                      fontSize: 15, color: Colors.black45)),
+                                  ],
+                                ),
                               ),
                               SizedBox(
                                 height: 4,
@@ -206,7 +218,7 @@ class _CategoryRWState extends State<CategoryRW> {
                                   "Imitwe : " +
                                       categories[index].chapters_count,
                                   style: GoogleFonts.lato(
-                                      fontSize: 15, color: Colors.black45)),
+                                      fontSize: 14, color: appColor)),
                               SizedBox(
                                 height: 4,
                               ),
