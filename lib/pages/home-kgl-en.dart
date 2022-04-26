@@ -9,19 +9,20 @@ import 'package:lglaw/models/category_model.dart';
 import 'package:lglaw/models/chapter_model.dart';
 import 'package:lglaw/pages/home-en.dart';
 import 'package:lglaw/pages/home-rw.dart';
+import 'package:lglaw/pages/kgl/kgl-home-en.dart';
 import 'package:lglaw/utils/colors.dart';
 import 'package:lglaw/widgets/app-icon.dart';
 import 'package:lglaw/widgets/big-text.dart';
 import 'package:lglaw/widgets/expandable-text.dart';
 
-class CategoryEN extends StatefulWidget {
-  const CategoryEN({Key? key}) : super(key: key);
+class HomeKGL_EN extends StatefulWidget {
+  const HomeKGL_EN({Key? key}) : super(key: key);
 
   @override
-  State<CategoryEN> createState() => _CategoryENState();
+  State<HomeKGL_EN> createState() => _HomeKGL_ENState();
 }
 
-class _CategoryENState extends State<CategoryEN> {
+class _HomeKGL_ENState extends State<HomeKGL_EN> {
   var categories = <Category>[];
 
   @override
@@ -31,7 +32,7 @@ class _CategoryENState extends State<CategoryEN> {
   }
 
   _initData() async {
-    await HttpRequest().getPublicData("retrieveCategoriesEN").then((response) {
+    await HttpRequest().getPublicData("retrieveCategoriesKglEN").then((response) {
       setState(() {
         Iterable list = json.decode(response.body);
         categories = list.map((model) => Category.fromJson(model)).toList();
@@ -74,7 +75,7 @@ class _CategoryENState extends State<CategoryEN> {
                           ),
                           Container(
                             width: 190,
-                            child: Text("Summary",
+                            child: Text("Summary ",
                                 overflow: TextOverflow.visible,
                                 style: TextStyle(
                                     color: whiteColor,
@@ -135,7 +136,7 @@ class _CategoryENState extends State<CategoryEN> {
                           onTap: (() {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => HomeEN(
+                              MaterialPageRoute(builder: (context) => KglHomeEN(
                                 categories[position].id,
                                 categories[position].title,
                               )),

@@ -4,22 +4,21 @@ import 'dart:io';
 import "package:flutter/material.dart";
 import 'package:http/http.dart' as http;
 import 'package:lglaw/pages/infos/laws-category-en.dart';
+import 'package:lglaw/pages/infos/laws-category-rw.dart';
 import 'package:lglaw/utils/colors.dart';
 import 'package:lglaw/widgets/app-icon.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
-
-class DecentralizationEN extends StatefulWidget {
-  const DecentralizationEN({Key? key}) : super(key: key);
+class DecentralizationRW extends StatefulWidget {
+  const DecentralizationRW({Key? key}) : super(key: key);
 
   @override
-  State<DecentralizationEN> createState() => _DecentralizationENState();
+  State<DecentralizationRW> createState() => _DecentralizationRWState();
 }
 
-class _DecentralizationENState extends State<DecentralizationEN> {
-
-   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+class _DecentralizationRWState extends State<DecentralizationRW> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   _appBar(height) => PreferredSize(
         preferredSize: Size(MediaQuery.of(context).size.width, height + 80),
         child: Stack(
@@ -52,11 +51,11 @@ class _DecentralizationENState extends State<DecentralizationEN> {
                           ),
                           Container(
                             width: 240,
-                            child: Text("Decentralization",
+                            child: Text("Ubuyobozi Bwegereye Abaturage",
                                 overflow: TextOverflow.visible,
                                 style: TextStyle(
                                     color: whiteColor,
-                                    fontSize: 26,
+                                    fontSize: 20,
                                     fontWeight: FontWeight.w600)),
                           ),
                         ],
@@ -67,14 +66,14 @@ class _DecentralizationENState extends State<DecentralizationEN> {
                       child: Row(
                         children: [
                           InkWell(
-                            onTap: (){
-                              Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => LawsCategoryEN()
-                              ),
-                            );
-                            },
-                            child: AppIcon(icon: Icons.arrow_forward)),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => LawsCategoryRW()),
+                                );
+                              },
+                              child: AppIcon(icon: Icons.arrow_forward)),
                         ],
                       ),
                     )
@@ -91,13 +90,11 @@ class _DecentralizationENState extends State<DecentralizationEN> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       key: _scaffoldKey,
+        key: _scaffoldKey,
         appBar: _appBar(AppBar().preferredSize.height),
         backgroundColor: whiteColor,
-      body: Container(
-        child: SfPdfViewer.network('https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf')
-        )
-    );
+        body: Container(
+            child: SfPdfViewer.network(
+                'https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf')));
   }
-
 }

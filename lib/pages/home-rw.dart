@@ -4,7 +4,6 @@ import 'package:accordion/accordion.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lglaw/api/http_request.dart';
 import 'package:lglaw/models/chapter_model.dart';
 import 'package:lglaw/pages/laws/laws-rw.dart';
@@ -64,7 +63,7 @@ class _HomeRWState extends State<HomeRW> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      margin: EdgeInsets.only(top: 10),
+                      margin: EdgeInsets.only(top: 25),
                       child: Row(
                         children: [
                           GestureDetector(
@@ -78,7 +77,7 @@ class _HomeRWState extends State<HomeRW> {
                             width: 200,
                             child: Text(widget.title,
                                 overflow: TextOverflow.visible,
-                                style: GoogleFonts.lato(
+                                style: TextStyle(
                                     color: whiteColor,
                                     fontSize: 17,
                                     fontWeight: FontWeight.w600)),
@@ -86,11 +85,14 @@ class _HomeRWState extends State<HomeRW> {
                         ],
                       ),
                     ),
-                    Row(
-                      children: [
-                        AppIcon(icon: Icons.search),
-                        AppIcon(icon: Icons.settings),
-                      ],
+                    Container(
+                      margin: EdgeInsets.only(top: 23),
+                      child: Row(
+                        children: [
+                          AppIcon(icon: Icons.search),
+                          AppIcon(icon: Icons.settings),
+                        ],
+                      ),
                     )
                   ],
                 ),
@@ -114,7 +116,7 @@ class _HomeRWState extends State<HomeRW> {
             children: [
               chapters.isEmpty ?
               Container(
-                height: MediaQuery.of(context).size.height,
+                height: 600,
                 margin: EdgeInsets.only(bottom: 10, left: 8, right: 8, top: 10),
                 child: Center(
                   child: SpinKitDoubleBounce(color: appColor,size: 70,),
@@ -129,13 +131,14 @@ class _HomeRWState extends State<HomeRW> {
                     itemBuilder: (context, position) {
                       return GestureDetector(
                         onTap: () {
+                          widget.id.toString() == "2" ?
                           Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) => LawsRW(
                                 chapters[position].id,
                                 chapters[position].text,
                               )),
-                            );
+                            ):'';
                         }, child: _buildShopItem(position)
                         );
                     }),
@@ -192,7 +195,7 @@ class _HomeRWState extends State<HomeRW> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                              Container(
-                                width: 270,
+                                width: 260,
                                 
                                 child: Text(chapters[index].text, style: TextStyle(color: appDarkColor),),
                               ),
@@ -204,7 +207,7 @@ class _HomeRWState extends State<HomeRW> {
                               Text(
                                   "Ingingo : " +
                                       chapters[index].articles_count,
-                                  style: GoogleFonts.lato(
+                                  style: TextStyle(
                                       fontSize: 15, color: Colors.black45)),
                               SizedBox(
                                 height: 4,
@@ -222,7 +225,7 @@ class _HomeRWState extends State<HomeRW> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-                                width: 270,
+                                width: 260,
                                 child: ExpandablePanel(
                                   header: Padding(
                                     padding: const EdgeInsets.only(top: 5),

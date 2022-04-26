@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lglaw/language.dart';
 import 'package:lglaw/pages/categories/category-rw.dart';
 import 'package:lglaw/pages/decentralization/decentralization-en.dart';
@@ -70,7 +69,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 alignment: Alignment.center,
                 child: Text("Rwanda Local Government Law",
                   textAlign: TextAlign.center,
-                        style: GoogleFonts.lato(color: appColor, fontSize: 25, fontWeight: FontWeight.bold)),
+                        style: TextStyle(color: appColor, fontSize: 25, fontWeight: FontWeight.bold)),
               ),
             )),
           SizedBox(height: 30,),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 class ExpandableText extends StatefulWidget {
 
   final String text;
@@ -28,9 +27,9 @@ class _ExpandableTextState extends State<ExpandableText> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: secondHalf.isEmpty?Text(firstHalf,style: GoogleFonts.lato(fontSize: 13,fontWeight: FontWeight.w500),):Column(
+      child: secondHalf.isEmpty?Text(firstHalf,style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500),):Column(
         children: [
-          Text(hiddenText?(firstHalf+'...'):(firstHalf+secondHalf),style: GoogleFonts.lato(fontSize: 13,fontWeight: FontWeight.w500)),
+          Text(hiddenText?(firstHalf+'...'):(firstHalf+secondHalf),style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500)),
           
         ],
       ),

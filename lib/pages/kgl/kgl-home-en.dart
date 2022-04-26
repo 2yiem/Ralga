@@ -12,15 +12,15 @@ import 'package:lglaw/widgets/app-icon.dart';
 import 'package:lglaw/widgets/big-text.dart';
 import 'package:lglaw/widgets/expandable-text.dart';
 
-class HomeEN extends StatefulWidget {
+class KglHomeEN extends StatefulWidget {
   final String id, title;
-  const HomeEN(this.id, this.title);
+  const KglHomeEN(this.id, this.title);
 
   @override
-  State<HomeEN> createState() => _HomeENState();
+  State<KglHomeEN> createState() => _KglHomeENState();
 }
 
-class _HomeENState extends State<HomeEN> {
+class _KglHomeENState extends State<KglHomeEN> {
   var chapters = <Chapters>[];
 
   @override
@@ -136,7 +136,7 @@ class _HomeENState extends State<HomeEN> {
                           itemBuilder: (context, position) {
                             return GestureDetector(
                                 onTap: () {
-                                  widget.id.toString() == "2" ?
+                                  widget.id.toString() == "3" ?
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -191,7 +191,7 @@ class _HomeENState extends State<HomeEN> {
                         ),
                         child: Image.asset("assets/images/rwlogo.png"),
                       ),
-                      widget.id.toString() == "2"
+                      widget.id.toString() == "3"
                           ? Padding(
                               padding: const EdgeInsets.all(4.0),
                               child: Container(

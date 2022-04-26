@@ -9,19 +9,21 @@ import 'package:lglaw/models/category_model.dart';
 import 'package:lglaw/models/chapter_model.dart';
 import 'package:lglaw/pages/home-en.dart';
 import 'package:lglaw/pages/home-rw.dart';
+import 'package:lglaw/pages/kgl/kgl-home-en.dart';
+import 'package:lglaw/pages/kgl/kgl-home-fr.dart';
 import 'package:lglaw/utils/colors.dart';
 import 'package:lglaw/widgets/app-icon.dart';
 import 'package:lglaw/widgets/big-text.dart';
 import 'package:lglaw/widgets/expandable-text.dart';
 
-class CategoryEN extends StatefulWidget {
-  const CategoryEN({Key? key}) : super(key: key);
+class HomeKGL_FR extends StatefulWidget {
+  const HomeKGL_FR({Key? key}) : super(key: key);
 
   @override
-  State<CategoryEN> createState() => _CategoryENState();
+  State<HomeKGL_FR> createState() => _HomeKGL_FRState();
 }
 
-class _CategoryENState extends State<CategoryEN> {
+class _HomeKGL_FRState extends State<HomeKGL_FR> {
   var categories = <Category>[];
 
   @override
@@ -31,7 +33,9 @@ class _CategoryENState extends State<CategoryEN> {
   }
 
   _initData() async {
-    await HttpRequest().getPublicData("retrieveCategoriesEN").then((response) {
+    await HttpRequest()
+        .getPublicData("retrieveCategoriesKglFR")
+        .then((response) {
       setState(() {
         Iterable list = json.decode(response.body);
         categories = list.map((model) => Category.fromJson(model)).toList();
@@ -74,7 +78,7 @@ class _CategoryENState extends State<CategoryEN> {
                           ),
                           Container(
                             width: 190,
-                            child: Text("Summary",
+                            child: Text("Sommaire ",
                                 overflow: TextOverflow.visible,
                                 style: TextStyle(
                                     color: whiteColor,
@@ -112,38 +116,42 @@ class _CategoryENState extends State<CategoryEN> {
         body: SingleChildScrollView(
           physics: AlwaysScrollableScrollPhysics(),
           child: Column(
-            
             children: [
-              
-              categories.isEmpty ?
-              Container(
-                height: 600,
-                margin: EdgeInsets.only(bottom: 10, left: 8, right: 8, top: 10),
-                child: Center(
-                  child: SpinKitDoubleBounce(color: appColor,size: 70,),
-                ), 
-              ):
-              Container(
-                height: MediaQuery.of(context).size.height,
-                margin: EdgeInsets.only(bottom: 10, left: 8, right: 8, top: 10),
-                child: ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: categories.length,
-                    itemBuilder: (context, position) {
-                      return GestureDetector(
-                          onTap: (() {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => HomeEN(
-                                categories[position].id,
-                                categories[position].title,
-                              )),
-                            );
+              categories.isEmpty
+                  ? Container(
+                      height: 600,
+                      margin: EdgeInsets.only(
+                          bottom: 10, left: 8, right: 8, top: 10),
+                      child: Center(
+                        child: SpinKitDoubleBounce(
+                          color: appColor,
+                          size: 70,
+                        ),
+                      ),
+                    )
+                  : Container(
+                      height: MediaQuery.of(context).size.height,
+                      margin: EdgeInsets.only(
+                          bottom: 10, left: 8, right: 8, top: 10),
+                      child: ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: categories.length,
+                          itemBuilder: (context, position) {
+                            return GestureDetector(
+                                onTap: (() {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => KglHomeFR(
+                                              categories[position].id,
+                                              categories[position].title,
+                                            )),
+                                  );
+                                }),
+                                child: _buildCategoryItem(position));
                           }),
-                          child: _buildCategoryItem(position));
-                    }),
-              ),
+                    ),
             ],
           ),
         ));
@@ -174,7 +182,7 @@ class _CategoryENState extends State<CategoryEN> {
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
-                     crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
                         height: 35,
@@ -182,7 +190,8 @@ class _CategoryENState extends State<CategoryEN> {
                         margin: EdgeInsets.all(2),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          border: Border.all(color: overlayWhiteColor, width: 3),
+                          border:
+                              Border.all(color: overlayWhiteColor, width: 3),
                         ),
                         child: Image.asset("assets/images/rwlogo.png"),
                       ),
@@ -198,27 +207,44 @@ class _CategoryENState extends State<CategoryEN> {
                                 width: 270,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(categories[index].title , style: TextStyle(color: appDarkColor, fontSize: 20, fontWeight: FontWeight.bold),),
-                                    SizedBox(height: 4,),
-                                    Text(categories[index].law_no, style: TextStyle(color: blackColor, fontSize: 18, fontWeight: FontWeight.bold),),
-                                    Text(categories[index].description, textAlign: TextAlign.justify,style: TextStyle(
-                                      fontSize: 15, color: Colors.black45)),
+                                    Text(
+                                      categories[index].title,
+                                      style: TextStyle(
+                                          color: appDarkColor,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    SizedBox(
+                                      height: 4,
+                                    ),
+                                    Text(
+                                      categories[index].law_no,
+                                      style: TextStyle(
+                                          color: blackColor,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Text(categories[index].description,
+                                        textAlign: TextAlign.justify,
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            color: Colors.black45)),
                                   ],
                                 ),
                               ),
                               SizedBox(
                                 height: 4,
                               ),
-                              Text(categories[index].id == "1" ?
-                                      "Articles : " +
-                                      categories[index].chapters_count
-                                      :
-                                      "Chapters : " +
-                                      categories[index].chapters_count,
+                              Text(
+                                  categories[index].id == "1"
+                                      ? "Articles : " +
+                                          categories[index].chapters_count
+                                      : "Chaptres : " +
+                                          categories[index].chapters_count,
                                   style: TextStyle(
-                                      fontSize: 14, color:appDarkColor)),
+                                      fontSize: 14, color: appDarkColor)),
                               SizedBox(
                                 height: 4,
                               ),
@@ -236,7 +262,6 @@ class _CategoryENState extends State<CategoryEN> {
             ),
           ),
         ),
-        
       ],
     );
   }

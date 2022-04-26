@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lglaw/api/http_request.dart';
 import 'package:lglaw/models/article_model.dart';
 import 'package:lglaw/models/chapter_model.dart';
@@ -65,7 +64,7 @@ class _LawsENState extends State<LawsEN> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      margin: EdgeInsets.only(top: 10),
+                      margin: EdgeInsets.only(top: 25),
                       child: Row(
                         children: [
                           GestureDetector(
@@ -76,21 +75,23 @@ class _LawsENState extends State<LawsEN> {
                             ),
                           ),
                           Container(
-                            width: 200,
+                            width: 240,
                             child: Text(widget.title,
                                 overflow: TextOverflow.visible,
-                                style: GoogleFonts.lato(
+                                style: TextStyle(
                                     color: whiteColor,
                                     fontWeight: FontWeight.w600)),
                           ),
                         ],
                       ),
                     ),
-                    Row(
-                      children: [
-                        AppIcon(icon: Icons.search),
-                        AppIcon(icon: Icons.settings),
-                      ],
+                    Container(
+                      margin: EdgeInsets.only(top: 25),
+                      child: Row(
+                        children: [
+                          AppIcon(icon: Icons.search),
+                        ],
+                      ),
                     )
                   ],
                 ),
@@ -114,7 +115,7 @@ class _LawsENState extends State<LawsEN> {
             children: [
               laws.isEmpty
                   ? Container(
-                      height: MediaQuery.of(context).size.height,
+                      height: 600,
                       margin: EdgeInsets.only(
                           bottom: 10, left: 8, right: 8, top: 10),
                       child: Center(
@@ -196,7 +197,7 @@ class _LawsENState extends State<LawsEN> {
                                   collapsed: Text(' ', softWrap: true, textAlign: TextAlign.justify, overflow: TextOverflow.ellipsis,),
                                   expanded: Padding(
                                     padding: const EdgeInsets.only(top: 5),
-                                    child: Text(laws[index].law, softWrap: true, textAlign: TextAlign.justify),
+                                    child: Text(laws[index].law == null ? "Ntayo" : laws[index].law, softWrap: true, textAlign: TextAlign.justify),
                                   ),
                                   
                                 ),

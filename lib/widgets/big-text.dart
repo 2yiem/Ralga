@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 class BigText extends StatelessWidget {
   final Color? color;
   final String text;
@@ -17,7 +16,7 @@ class BigText extends StatelessWidget {
     return Text(
       text,
       overflow: overflow,
-      style: GoogleFonts.lato(
+      style: TextStyle(
 
       ),
     );

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lglaw/pages/categories/category-en.dart';
 import 'package:lglaw/pages/categories/category-fr.dart';
 import 'package:lglaw/pages/categories/category-rw.dart';
 import 'package:lglaw/pages/home-en.dart';
 import 'package:lglaw/pages/home-fr.dart';
 import 'package:lglaw/pages/home-rw.dart';
+import 'package:lglaw/pages/infos/information_en.dart';
+import 'package:lglaw/pages/infos/information_fr.dart';
+import 'package:lglaw/pages/infos/information_rw.dart';
 import 'package:lglaw/utils/colors.dart';
 
 class Language extends StatefulWidget {
@@ -24,10 +26,11 @@ class _LanguageState extends State<Language> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset("assets/images/rwanda.jpg", scale: 3),
+            Image.asset("assets/images/logo.png", scale: 3),
+            SizedBox(height: 15,),
             Text('Welcome!',
                 textAlign: TextAlign.center,
-                style: GoogleFonts.lato(
+                style: TextStyle(
                     color: appColor,
                     fontSize: 25,
                     fontWeight: FontWeight.bold)),
@@ -42,7 +45,7 @@ class _LanguageState extends State<Language> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text("RALGA is a membership organization that brings together local government entities in Rwanda.",
-                    textAlign: TextAlign.justify, style: GoogleFonts.laila(fontSize: 15),),
+                    textAlign: TextAlign.justify, style: TextStyle(fontSize: 15),),
                   ),
                   SizedBox(height: 60,),
                   Text("Choose language", style: TextStyle(color: appColor),),
@@ -54,26 +57,15 @@ class _LanguageState extends State<Language> {
                         onTap: (() {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const CategoryEN()),
+                            MaterialPageRoute(builder: (context) => const InformationEN()),
                           );
                         }),
                         child: Column(
                           children: [
-                            Container(
-                              margin: EdgeInsets.all(5),
-                              padding: EdgeInsets.all(5),
-                              width: 70,
-                              height: 70,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.white,
-                                border: Border.all(color: overlayColor, width: 3),
-                              ),
-                              child: Image.asset("assets/images/flaguk.png"),
-                            ),
+                            
                             Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text("English",style: TextStyle(color: appColor)),
+                              padding: const EdgeInsets.only(top: 50.0),
+                              child: Text("English",style: TextStyle(color: appColor, fontWeight: FontWeight.bold)),
                             ),
                           ],
                         ),
@@ -82,7 +74,7 @@ class _LanguageState extends State<Language> {
                         onTap: (() {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const CategoryRW()),
+                            MaterialPageRoute(builder: (context) => const InformationRW()),
                           );
                         }),
                         child: Column(
@@ -90,8 +82,8 @@ class _LanguageState extends State<Language> {
                             Container(
                               margin: EdgeInsets.all(5),
                               padding: EdgeInsets.all(5),
-                              width: 70,
-                              height: 70,
+                              width: 40,
+                              height: 40,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: Colors.white,
@@ -101,7 +93,7 @@ class _LanguageState extends State<Language> {
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Text("Kinyarwanda",style: TextStyle(color: appColor)),
+                              child: Text("Kinyarwanda",style: TextStyle(color: appColor, fontWeight: FontWeight.bold)),
                             ),
                           ],
                         ),
@@ -110,26 +102,15 @@ class _LanguageState extends State<Language> {
                         onTap: (() {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const CategoryFR()),
+                            MaterialPageRoute(builder: (context) => const InformationFR()),
                           );
                         }),
                         child: Column(
                           children: [
-                            Container(
-                              margin: EdgeInsets.all(5),
-                              padding: EdgeInsets.all(5),
-                              width: 70,
-                              height: 70,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.white,
-                                border: Border.all(color: overlayColor, width: 3),
-                              ),
-                              child: Image.asset("assets/images/flagfr.png"),
-                            ),
+                            
                             Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text("French",style: TextStyle(color: appColor)),
+                              padding: const EdgeInsets.only(top: 50.0),
+                              child: Text("Français",style: TextStyle(color: appColor, fontWeight: FontWeight.bold)),
                             ),
                           ],
                         ),

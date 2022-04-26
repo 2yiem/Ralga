@@ -4,7 +4,6 @@ import 'package:accordion/accordion.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lglaw/api/http_request.dart';
 import 'package:lglaw/models/category_model.dart';
 import 'package:lglaw/models/chapter_model.dart';
@@ -63,7 +62,7 @@ class _CategoryFRState extends State<CategoryFR> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      margin: EdgeInsets.only(top: 10),
+                      margin: EdgeInsets.only(top: 25),
                       child: Row(
                         children: [
                           GestureDetector(
@@ -77,7 +76,7 @@ class _CategoryFRState extends State<CategoryFR> {
                             width: 190,
                             child: Text("Sommaire",
                                 overflow: TextOverflow.visible,
-                                style: GoogleFonts.lato(
+                                style: TextStyle(
                                     color: whiteColor,
                                     fontSize: 30,
                                     fontWeight: FontWeight.w600)),
@@ -85,11 +84,14 @@ class _CategoryFRState extends State<CategoryFR> {
                         ],
                       ),
                     ),
-                    Row(
-                      children: [
-                        AppIcon(icon: Icons.search),
-                        AppIcon(icon: Icons.settings),
-                      ],
+                    Container(
+                      margin: EdgeInsets.only(top: 23),
+                      child: Row(
+                        children: [
+                          AppIcon(icon: Icons.search),
+                          AppIcon(icon: Icons.settings),
+                        ],
+                      ),
                     )
                   ],
                 ),
@@ -114,7 +116,7 @@ class _CategoryFRState extends State<CategoryFR> {
              
               categories.isEmpty ?
               Container(
-                height: MediaQuery.of(context).size.height,
+                height: 600,
                 margin: EdgeInsets.only(bottom: 10, left: 8, right: 8, top: 10),
                 child: Center(
                   child: SpinKitDoubleBounce(color: appColor,size: 70,),
@@ -201,7 +203,7 @@ class _CategoryFRState extends State<CategoryFR> {
                                     Text(categories[index].title , style: TextStyle(color: appDarkColor, fontSize: 20, fontWeight: FontWeight.bold),),
                                     SizedBox(height: 4,),
                                     Text(categories[index].law_no, style: TextStyle(color: blackColor, fontSize: 18, fontWeight: FontWeight.bold),),
-                                    Text(categories[index].description, textAlign: TextAlign.justify,style: GoogleFonts.lato(
+                                    Text(categories[index].description, textAlign: TextAlign.justify,style: TextStyle(
                                       fontSize: 15, color: Colors.black45)),
                                   ],
                                 ),
@@ -212,7 +214,7 @@ class _CategoryFRState extends State<CategoryFR> {
                               Text(
                                   "Articles : " +
                                       categories[index].chapters_count,
-                                  style: GoogleFonts.lato(
+                                  style: TextStyle(
                                       fontSize: 14, color: appColor)),
                               SizedBox(
                                 height: 4,
